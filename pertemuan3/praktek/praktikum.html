@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+
+      html,
+      body {
+        height: 100%;
+      }
+
+      .header-img {
+        width: 100%;
+        height: 20%;
+        object-fit: cover;
+      }
+
+      form {
+        margin-left: 370px;
+        margin-top: 50px;
+      }
+    </style>
+  </head>
+  <body>
+    <img src="./bg.jpg" alt="Header Image" class="header-img" />
+
+    <form action="#">
+      <table>
+        <tr>
+          <td>Nama</td>
+          <td><input type="text" id="nama" /></td>
+        </tr>
+
+        <tr>
+          <td>Alamat</td>
+          <td><textarea id="alamat"></textarea></td>
+        </tr>
+
+        <tr>
+          <td>Tanggal lahir</td>
+          <td><input type="text" id="tanggalLahir" /></td>
+        </tr>
+
+        <tr>
+          <td>Jenis Kelamin</td>
+          <td><input type="checkbox" id="jenisKelaminLaki" />Laki Laki</td>
+        </tr>
+
+        <tr>
+          <td></td>
+          <td><input type="checkbox" id="jenisKelaminPerempuan" />Perempuan</td>
+        </tr>
+
+        <tr>
+          <td>Hobby</td>
+          <td><input type="checkbox" id="hobby1" />Berenang</td>
+          <td><input type="checkbox" id="hobby2" />Berlari</td>
+          <td><input type="checkbox" id="hobby3" />Lain-lain</td>
+        </tr>
+
+        <tr>
+          <td>Pekerjaan</td>
+          <td><input type="checkbox" id="pekerjaan1" />Swasta</td>
+          <td><input type="checkbox" id="pekerjaan2" />PNS</td>
+          <td><input type="checkbox" id="pekerjaan3" />Lain-lain</td>
+        </tr>
+
+        <tr>
+          <td>
+            <input type="checkbox" id="dataCompleteCheckbox" />Check Jika anda akan mengirimkan data ini
+          </td>
+        </tr>
+
+        <tr>
+          <td><button type="button" onclick="validateForm()">Cek!</button></td>
+        </tr>
+      </table>
+    </form>
+    <script>
+      function validateForm() {
+        var nama = document.getElementById("nama").value;
+        var alamat = document.getElementById("alamat").value;
+        var tanggalLahir = document.getElementById("tanggalLahir").value;
+
+        // Untuk jenis kelamin
+        var jenisKelaminLaki = document.getElementById("jenisKelaminLaki").checked;
+        var jenisKelaminPerempuan = document.getElementById("jenisKelaminPerempuan").checked;
+
+        // Untuk hobby
+        var hobby1 = document.getElementById("hobby1").checked;
+        var hobby2 = document.getElementById("hobby2").checked;
+        var hobby3 = document.getElementById("hobby3").checked;
+
+        // Untuk pekerjaan
+        var pekerjaan1 = document.getElementById("pekerjaan1").checked;
+        var pekerjaan2 = document.getElementById("pekerjaan2").checked;
+        var pekerjaan3 = document.getElementById("pekerjaan3").checked;
+
+        var dataCompleteCheckbox = document.getElementById("dataCompleteCheckbox").checked;
+
+        // Cek jika ada field yang kosong
+        if (!nama || !alamat || !tanggalLahir || (!jenisKelaminLaki && !jenisKelaminPerempuan) || (!hobby1 && !hobby2 && !hobby3) || (!pekerjaan1 && !pekerjaan2 && !pekerjaan3) || !dataCompleteCheckbox) {
+          alert("Data belum lengkap. Mohon isi semua field dan centang kotak jika ingin mengirimkan data.");
+          return;
+        }
+
+        // Pastikan hanya satu jenis kelamin yang dipilih
+        if (jenisKelaminLaki && jenisKelaminPerempuan) {
+          alert("Anda hanya boleh memilih satu jenis kelamin.");
+          return;
+        }
+
+        // Pastikan hanya satu pekerjaan yang dipilih
+        var pekerjaanCount = pekerjaan1 + pekerjaan2 + pekerjaan3;
+        if (pekerjaanCount > 1) {
+          alert("Anda hanya boleh memilih satu pekerjaan.");
+          return;
+        }
+
+        // Jika semua validasi lolos
+        alert("Data telah terkirim!");
+      }
+    </script>
+  </body>
+</html>
